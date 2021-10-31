@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 module.exports = function (app, passport, db) {
 
   // normal routes ===============================================================
@@ -44,7 +45,9 @@ module.exports = function (app, passport, db) {
       .save({
         'goal': req.body.goal,
         'amount': req.body.amount,
+        'spent': req.body.spent,
         'balance': req.body.balance,
+        'amountLeft': req.body.amountLeft,
         'note': req.body.note,
         'completed': req.body.completed,
         'userEmail': req.user.local.email
@@ -68,27 +71,16 @@ module.exports = function (app, passport, db) {
   //   .catch(err => { res.send(err) })
   // })
 
-  // app.put('/decrement', (req, res) => {
-  //   db.collection('messages')
-  //   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-  //     $set: {
-  //       thumbUp:req.body.thumbUp - 1
-  //     }
-  //   }, {
-  //     sort: {_id: -1},
-  //     upsert: true
-  //   }, (err, result) => {
-  //     if (err) return res.send(err)
-  //     res.send(result)
-  //   })
-  // })
-
-  // app.delete('/messages', (req, res) => {
-  //   db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
-  //     if (err) return res.send(500, err)
-  //     res.send('Message deleted!')
-  //   })
-  // })
+  app.delete("/deleteOne", (req, res) => {
+    db.collection("budget").findOneAndDelete(
+      { _id: new mongoose.mongo.ObjectID(req.body.id) },
+      (err, result) => {
+        if (err) return res.send(500, err);
+        res.send("deleted!");
+        // console.log(result);
+      }
+    );
+  });
 
   app.delete('/clear', (req, res) => {
     db.collection('budget').deleteMany({ userEmail: req.user.local.email }, (err, result) => {

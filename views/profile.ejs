@@ -19,44 +19,50 @@
     </div>
 
 <section id="budgetTitle">
-  <h1 id="haveMoreGoals">Add goals to your personal spreadsheet</h1>
+  <h1 id="haveMoreGoals">Track how much you are spending, or have left per project inputed.
+    <span style="color:black">Just enter the amount allocated, and amount spent, 
+      and we'll calculate how much you have left.</span> 
+  </h1>
 </section>
 
     <ul class="testTable">
-      <% console.log(userEntries) %>
       <ul class="entry">
         <section class="dividers">
-        <input class ="goal" placeholder="goal">
+        <input class ="goal" placeholder="budget title">
       </section> 
         <section class="dividers">
-        <input class ="amount" placeholder="amount needed">
+        <input class ="amount" type="number" min ="0" placeholder="amount allocated">
       </section>
       <section class="dividers">
-        <input class ="balance" placeholder="balance" >
+        <input class ="spent" type="number" min ="0"  placeholder="amount spent">
       </section>
       <section class="dividers">
-        <input class ="note" placeholder="your note">
+        <input class ="balance" placeholder="amount left" readonly>
       </section>
-      
+      <section class="dividers">
+        <input class ="note" placeholder="your note" >
+      </section>
       <button type="submit" class="addGoal"></button>
+
       </ul>
-      <% console.log(userEntries) %>
       <% for(let i = 0; i < userEntries.length; i++) { %>
         <ul class="entry">
           <section class="dividers">
-          <input class ="goal" placeholder="goal" value="<%= userEntries[i].goal %>">
+          <input class ="goal" placeholder="budget title" value="<%= userEntries[i].goal %>">
         </section>
           <section class="dividers">
-          <input class ="amount" placeholder="amount needed" value="<%= userEntries[i].amount %>">
+          <input class ="amount" type="number" min ="0" placeholder="amount allocated" value="<%= userEntries[i].amount %>">
         </section>
         <section class="dividers">
-          <input class ="balance" placeholder="balance" value="<%= userEntries[i].balance %>">
+          <input class ="spent" type="number" min="0" placeholder="amount spent" value="<%= userEntries[i].spent %>">
+        </section>
+        <section class="dividers">
+          <input class ="balance" placeholder="amount left" readOnly= true value="<%= userEntries[i].amountLeft %>">
         </section>
         <section class="dividers">
           <input class ="note" placeholder="your note" value="<%= userEntries[i].note %>">
         </section>
-        
-        <button type="submit" class="addGoal"></button>
+        <button class="deleteTask" onclick="deleteGoal('<%= userEntries[i]._id %>')"></button>
         </ul>
       <% } %>
 
