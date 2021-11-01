@@ -1,5 +1,5 @@
 <img src = "budget-1.png" width = 100%>
-<img src = "budget-2.png" width = 100%>
+<img src = "budget-list.png" width = 100%>
 
 
 ## Goal
