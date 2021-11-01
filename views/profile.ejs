@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Budget Tracker</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&family=Inconsolata:wght@800&family=Noticia+Text:wght@700&family=Cedarville+Cursive&family=Homemade+Apple&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="page-header text-center">
+      <h1 id="profile"><span class="fa fa-anchor"></span> Profile Page</h1>
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+<section id="budgetTitle">
+  <h1 id="haveMoreGoals">Track how much you are spending, or have left per project inputed.
+    <span style="color:black">Just enter the amount allocated, and amount spent, 
+      and we'll calculate how much you have left.</span> 
+  </h1>
+</section>
+
+    <ul class="testTable">
+      <ul class="entry">
+        <section class="dividers">
+        <input class ="goal" placeholder="budget title">
+      </section> 
+        <section class="dividers">
+        <input class ="amount" type="number" min ="0" placeholder="amount allocated">
+      </section>
+      <section class="dividers">
+        <input class ="spent" type="number" min ="0"  placeholder="amount spent">
+      </section>
+      <section class="dividers">
+        <input class ="balance" placeholder="amount left" readonly>
+      </section>
+      <section class="dividers">
+        <input class ="note" placeholder="your note" >
+      </section>
+      <button type="submit" class="addGoal"></button>
+
+      </ul>
+      <ul class="entry">
+      <% for(let i = 0; i < userEntries.length; i++) { %>
+        <li >
+        <section class="dividers">
+          <input <%= (userEntries[i].completed) ? 'class = strike goal' : 'class = goal' %> placeholder="budget title" value="<%= userEntries[i].goal %>">
+        </section>
+          <section class="dividers">
+          <input <%= (userEntries[i].completed) ? 'class = strike amount' : 'class = amount' %> type="number" min ="0" placeholder="amount allocated" value="<%= userEntries[i].amount %>">
+        </section>
+        <section class="dividers">
+          <input <%= (userEntries[i].completed) ? 'class = strike spent' : 'class = spent' %> type="number" min="0" placeholder="amount spent" value="<%= userEntries[i].spent %>">
+        </section>
+        <section class="dividers">
+          <input <%= (userEntries[i].completed) ? 'class = strike balance' : 'class = balance' %> placeholder="amount left" readOnly= true value="<%= userEntries[i].amountLeft %>">
+        </section>
+        <section class="dividers">
+          <input <%= (userEntries[i].completed) ? 'class = strike note' : 'class = note' %> placeholder="your note" value="<%= userEntries[i].note %>">
+        </section>
+        <button class="check" onclick="checkRow('<%= userEntries[i]._id %>')"></button>
+
+        <button class="deleteTask" onclick="deleteGoal('<%= userEntries[i]._id %>')"></button>
+      </li>  
+      <% } %>
+    </ul>
+
+    <button id="clear"> clear spreadsheet</button>
+  </section>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
